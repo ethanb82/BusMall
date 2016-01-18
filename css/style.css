@@ -1,0 +1,19 @@
+.logo {
+  width: 100%;
+  display: flex;
+  justify-content: center
+}
+.outerBox {
+  width:100%;
+  display: flex;
+  justify-content: center;
+}
+.imgContainer {
+  width: 200px;
+  height: 200px;
+}
+.itemImg {
+  border: 2px solid black;
+  width: 90%;
+  height: 90%
+}
