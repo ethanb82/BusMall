@@ -5,15 +5,36 @@
 }
 .outerBox {
   width:100%;
+  margin-top: 75px;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 .imgContainer {
-  width: 200px;
-  height: 200px;
+  display: flex;
+  justify-content: center;
+  width: 260px;
+  height: 260px;
+  flex-wrap: wrap
 }
 .itemImg {
   border: 2px solid black;
-  width: 90%;
-  height: 90%
+  width: 80%;
+  height: 80%;
+}
+.itemHighlight {
+  display: flex;
+  justify-content: center;
+  width: 260px;
+  cursor: pointer;
+  height: width;
+  flex-wrap: wrap
+}
+h3 {
+  font-family: Tahoma;
+}
+h2 {
+  font-family: Tahoma;
+  color: #49b0ff;
+  cursor: pointer
 }

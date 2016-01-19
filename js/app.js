@@ -11,26 +11,60 @@ function item(indexNum, name, filepath){
 }
 
 item.prototype.render = function() {
-  var num = this.indexNum;
-  console.log('Rendering ' + this.itemName);
+  var objRef = this;
   var container = document.getElementById('container');
   this.divEl = document.createElement('div');
   this.divEl.className = 'imgContainer';
-  this.divEl.setAttribute('data', this.indexNum);
+
   this.divEl.addEventListener('click', function(){
-    window.items[num].clickCount += 1;
+    objRef.clickCount += 1;
     numChosen += 1;
-    console.log('The user selected ' + window.items[num].itemName + ' ' + window.items[num].clickCount + ' time(s).');
+    console.log('The user selected ' + objRef.itemName + ' ' + objRef.clickCount + ' time(s).');
     console.log('The user has made ' + numChosen + ' selections.')
     refresh();
     if (numChosen === 15) {showDetails();}
   })
+
   container.appendChild(this.divEl);
   this.img = document.createElement('img');
   this.img.setAttribute('src', this.filepath);
+  this.img.setAttribute('style', 'opacity:0.6');
   this.img.className = 'itemImg';
+
+  this.img.addEventListener('mouseover', function(){
+    objRef.superSizeMe(260, 320, 4, 8, 0.6, 1);
+  })
+  this.img.addEventListener('mouseout', function(){
+    objRef.superSizeMe(320, 260, -4, 8, 1, 0.6);
+  })
+
   this.divEl.appendChild(this.img);
+  this.text = document.createElement('h3');
+  this.text.textContent = this.itemName;
+  this.divEl.appendChild(this.text);
   this.renderCount += 1;
+}
+
+item.prototype.superSizeMe = function(start, target, rate, delayRate, opacityStart, opacityTarget) {
+  var delay = 0;
+  var size = start;
+  var opacity = opacityStart;
+  var opacityInc = (opacityStart - opacityTarget)/((start - target) / rate);
+  this.divEl.className = 'itemHighlight';
+  while (size != target){
+    delay += delayRate;
+    size += rate;
+    opacity += opacityInc
+    this.resize(size, this, delay, opacity);
+  }
+}
+item.prototype.resize = function(size, objRef, delay, opacity){
+  var obj = objRef;
+  setTimeout(function(){
+    obj.divEl.setAttribute('style', 'height:' + size + 'px');
+    obj.divEl.setAttribute('style', 'width:' + size + 'px');
+    obj.img.setAttribute('style', 'opacity:' + opacity);
+  }, delay);
 }
 
 
@@ -46,7 +80,6 @@ function randNums(){ // Returns an array of 3 unique random numbers between 0 an
 
 function printItems() {
   chosen = randNums();
-  console.log(chosen);
   items[chosen[0]].render();
   items[chosen[1]].render();
   items[chosen[2]].render();
@@ -69,7 +102,7 @@ function showDetails() {
 
 items[0] = new item(0, 'R2D2 Bag', 'images/bag.jpg');
 items[1] = new item(1, 'Banana Cutter', 'images/banana.jpg');
-items[2] = new item(2, 'Open-toe Boots', 'images/boots.jpg');
+items[2] = new item(2, 'Open-Toe Boots', 'images/boots.jpg');
 items[3] = new item(3, 'Uncomfortable Chair', 'images/chair.jpg');
 items[4] = new item(4, 'Cthulhu', 'images/cthulhu.jpg');
 items[5] = new item(5, 'Dragon Meat', 'images/dragon.jpg');
