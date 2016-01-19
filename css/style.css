@@ -7,8 +7,22 @@
   width:100%;
   margin-top: 75px;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+}
+.detailsBox {
+  width:100%;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.detailsInfo {
+  width:100%;
+  margin-top: 5px;
+  display: flex;
+  justify-content: center;
 }
 .imgContainer {
   display: flex;
@@ -32,9 +46,38 @@
 }
 h3 {
   font-family: Tahoma;
+  cursor: pointer;
 }
 h2 {
   font-family: Tahoma;
   color: #49b0ff;
-  cursor: pointer
+  cursor: pointer;
+}
+h2:hover {
+  font-family: Tahoma;
+  color: #245983;
+  cursor: pointer;
+}
+.detTable {
+  background-color: #d2e6fb;
+  margin: 12px;
+  width: 84%;
+  left: -8%;
+  border: 2px solid black;
+  padding: 2px;
+}
+.detCell {
+  padding: 2px;
+  background-color: #e6f2ff;
+  text-align: right;
+  font-style: italic;
+}
+.detHead {
+  padding: 3px;
+  background-color: #acd5ff;
+  border: 1px solid black;
+  text-align: center;
+  width: 150px;
+  font-weight: bold;
+  font-family: Tahoma;
 }
