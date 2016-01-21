@@ -54,6 +54,8 @@
     this.text.setAttribute('style', 'opacity:0.6');
     this.divEl.appendChild(this.text);
     this.renderCount += 1;
+    localArray[this.indexNum][1]= this.renderCount;
+    localStorage.setItem('itemData',JSON.stringify(localArray));
   };
   item.prototype.clicked = function() {
     this.clickCount += 1;
@@ -62,6 +64,10 @@
       details.detChart.datasets[0].bars[this.indexNum].value = this.clickCount + 1;
       details.detChart.update();
     }
+
+    localArray[this.indexNum][0]= this.clickCount;
+    localStorage.setItem('itemData',JSON.stringify(localArray));
+    localStorage.setItem('totalClicks', details.numChosen);
   };
   item.prototype.superSizeMe = function(start, target, rate, delayRate, opacityStart, opacityTarget) {
     var delay = 0;
@@ -142,4 +148,27 @@
 
   var itemArgs = [[0, 'R2D2 Bag', 'images/bag.jpg'], [1, 'Banana Cutter', 'images/banana.jpg'], [2, 'Open-Toe Boots', 'images/boots.jpg'], [3, 'Uncomfortable Chair', 'images/chair.jpg'], [4, 'Cthulhu', 'images/cthulhu.jpg'], [5, 'Dragon Meat', 'images/dragon.jpg'], [6, 'Pen Utensils', 'images/pen.jpg'], [7, 'Pizza Scissors', 'images/scissors.jpg'], [8, 'Tauntaun Sleeping Bag', 'images/sleepingbag.jpg'], [9, 'Baby Sweeper', 'images/sweep.png'], [10, 'Unicorn Meat', 'images/unicorn.jpg'], [11, 'USB Tentacle', 'images/usb.gif'], [12, 'Water Can', 'images/water-can.jpg'], [13, 'Wine Glass', 'images/wine-glass.jpg']];
   itemArgs.forEach(function(args, index){details.items[index] = new item(args[0], args[1], args[2]);});
+
+  var localArray = JSON.parse(localStorage.getItem ('itemData'));
+  var totalClicks = parseInt(localStorage.getItem('totalClicks'));
+  if (localArray) {
+    details.items.forEach(function(item, position){
+      item.clickCount = localArray[position][0]
+      item.renderCount = localArray[position][1]
+      details.numChosen = totalClicks
+    })
+  } else {
+    var localArray = [];
+    details.items.forEach(function(item, position){
+      var itemInfo = [];
+      itemInfo [0] = item.clickCount;
+      itemInfo [1] = item.renderCount;
+      localArray.push(itemInfo);
+    })
+    localStorage.setItem('itemData',JSON.stringify(localArray));
+    console.log ('Console log empty!');
+  }
+  if (totalClicks >= 15){
+    details.showDetails();
+  }
   printItems();
