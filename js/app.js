@@ -21,20 +21,20 @@ details.showDetails = function(){
       details.div.removeChild(details.buttonEl);
       details.detChart.destroy();
     }
-  })
+  });
   this.div.appendChild(this.detailsButton);
 };
 details.refreshButton = function(){
   details.buttonEl = document.createElement('img');
   details.buttonEl.setAttribute('src', 'images/refresh.jpg');
   details.buttonEl.className = 'refreshImg';
-  details.buttonEl.addEventListener('click', function(){details.render();})
-  details.buttonEl.addEventListener('mouseover', function(){details.buttonEl.setAttribute('src', 'images/refreshO.jpg');})
-  details.buttonEl.addEventListener('mouseout', function(){details.buttonEl.setAttribute('src', 'images/refresh.jpg');})
+  details.buttonEl.addEventListener('click', function(){details.render();});
+  details.buttonEl.addEventListener('mouseover', function(){details.buttonEl.setAttribute('src', 'images/refreshO.jpg');});
+  details.buttonEl.addEventListener('mouseout', function(){details.buttonEl.setAttribute('src', 'images/refresh.jpg');});
   details.div.appendChild(details.buttonEl);
-}
+};
 details.render = function(){
-  this.detailsButton.textContent = 'Hide Details'
+  this.detailsButton.textContent = 'Hide Details';
   this.open = true;
   chartData.labels = [];
   chartData.datasets[0].data = [];
@@ -44,8 +44,8 @@ details.render = function(){
     chartData.datasets[0].data.push(product.clickCount);
     chartData.datasets[1].data.push(product.renderCount);
   });
-  this.details = document.getElementById('myChart').getContext("2d");
-  if(! this.fresh){this.detChart.destroy()};
+  this.details = document.getElementById('myChart').getContext('2d');
+  if(! this.fresh){this.detChart.destroy();}
   this.detChart = new Chart(this.details).Bar(chartData, {responsive: true});
   this.fresh = false;
 };
@@ -63,24 +63,24 @@ item.prototype.render = function() {
   this.divEl.addEventListener('click', function(){
     objRef.clickCount += 1;
     details.numChosen += 1;
-    console.log('The user has made ' + details.numChosen + ' selections.')
+    console.log('The user has made ' + details.numChosen + ' selections.');
     refresh();
     if (details.numChosen === 15) {details.showDetails();}
-  })
+  });
   container.appendChild(this.divEl);
   this.img = document.createElement('img');
   this.img.setAttribute('src', this.filepath);
   this.img.setAttribute('style', 'opacity:0.6');
   this.img.className = 'itemImg';
-  this.img.addEventListener('mouseover', function(){objRef.superSizeMe(260, 270, 1, 10, 0.6, 1);})
-  this.img.addEventListener('mouseout', function(){objRef.superSizeMe(270, 260, -1, 10, 1, 0.6);})
+  this.img.addEventListener('mouseover', function(){objRef.superSizeMe(260, 270, 1, 10, 0.6, 1);});
+  this.img.addEventListener('mouseout', function(){objRef.superSizeMe(270, 260, -1, 10, 1, 0.6);});
   this.divEl.appendChild(this.img);
   this.text = document.createElement('h3');
   this.text.textContent = this.itemName;
   this.text.setAttribute('style', 'opacity:0.6');
   this.divEl.appendChild(this.text);
   this.renderCount += 1;
-}
+};
 item.prototype.superSizeMe = function(start, target, rate, delayRate, opacityStart, opacityTarget) {
   var delay = 0;
   var size = start;
@@ -90,10 +90,10 @@ item.prototype.superSizeMe = function(start, target, rate, delayRate, opacitySta
   while (size != target){
     delay += delayRate;
     size += rate;
-    opacity += opacityInc
+    opacity += opacityInc;
     this.resize(size, this, delay, opacity);
   }
-}
+};
 item.prototype.resize = function(size, objRef, delay, opacity){
   var obj = objRef;
   setTimeout(function(){
@@ -102,45 +102,45 @@ item.prototype.resize = function(size, objRef, delay, opacity){
     obj.img.setAttribute('style', 'opacity:' + opacity);
     obj.text.setAttribute('style', 'opacity:' + opacity);
   }, delay);
-}
+};
 var chartData = {
   labels: [],
   datasets: [
     {
-      label: "Number of Clicks",
+      label: 'Number of Clicks',
       data: [],
-      fillColor: "rgba(199,255,171,0.8)",
-      strokeColor: "rgba(90,196,38,0.5)",
-      highlightFill: "rgba(199,255,171,1)",
-      highlightStroke: "rgba(90,196,38,0.75)"
+      fillColor: 'rgba(199,255,171,0.8)',
+      strokeColor: 'rgba(90,196,38,0.5',
+      highlightFill: 'rgba(199,255,171,1)',
+      highlightStroke: 'rgba(90,196,38,0.75)'
     },
     {
-      label: "Click/Render Ratio",
+      label: 'Click/Render Ratio',
       data: [],
-      fillColor: "rgba(151,187,205,0.5)",
-      strokeColor: "rgba(151,187,205,0.8)",
-      highlightFill: "rgba(151,187,205,0.75)",
-      highlightStroke: "rgba(151,187,205,1)",
+      fillColor: 'rgba(151,187,205,0.5)',
+      strokeColor: 'rgba(151,187,205,0.8)',
+      highlightFill: 'rgba(151,187,205,0.75)',
+      highlightStroke: 'rgba(151,187,205,1)',
     }
   ]
 };
 function randNums(){ // Returns an array of 3 unique random numbers between 0 and 14
   var array = [0, 0, 0];
   while (array[0] === array[1] || array[1] === array[2] || array[0] === array[2]){
-    array.forEach(function(zero, index){array[index] = Math.floor(Math.random() * 14)});
+    array.forEach(function(zero, index){array[index] = Math.floor(Math.random() * 14);});
   }
   return array;
 }
 function printItems() {
   details.chosen = randNums();
-  details.chosen.forEach(function(itemNum){details.items[itemNum].render()});
+  details.chosen.forEach(function(itemNum){details.items[itemNum].render();});
 }
 function refresh() {
   var container = document.getElementById('container');
-  details.chosen.forEach(function(itemNum){container.removeChild(details.items[itemNum].divEl)});
+  details.chosen.forEach(function(itemNum){container.removeChild(details.items[itemNum].divEl);});
   printItems();
 }
 
 var itemArgs = [['R2D2 Bag', 'images/bag.jpg'], ['Banana Cutter', 'images/banana.jpg'], ['Open-Toe Boots', 'images/boots.jpg'], ['Uncomfortable Chair', 'images/chair.jpg'], ['Cthulhu', 'images/cthulhu.jpg'], ['Dragon Meat', 'images/dragon.jpg'], ['Pen Utensils', 'images/pen.jpg'], ['Pizza Scissors', 'images/scissors.jpg'], ['Tauntaun Sleeping Bag', 'images/sleepingbag.jpg'], ['Baby Sweeper', 'images/sweep.png'], ['Unicorn Meat', 'images/unicorn.jpg'], ['USB Tentacle', 'images/usb.gif'], ['Water Can', 'images/water-can.jpg'], ['Wine Glass', 'images/wine-glass.jpg']];
-itemArgs.forEach(function(args, index){details.items[index] = new item(args[0], args[1])});
+itemArgs.forEach(function(args, index){details.items[index] = new item(args[0], args[1]);});
 printItems();
