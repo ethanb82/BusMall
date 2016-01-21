@@ -72,8 +72,8 @@ item.prototype.render = function() {
   this.img.setAttribute('src', this.filepath);
   this.img.setAttribute('style', 'opacity:0.6');
   this.img.className = 'itemImg';
-  this.img.addEventListener('mouseover', function(){objRef.superSizeMe(260, 280, 2, 8, 0.6, 1);})
-  this.img.addEventListener('mouseout', function(){objRef.superSizeMe(280, 260, -2, 8, 1, 0.6);})
+  this.img.addEventListener('mouseover', function(){objRef.superSizeMe(260, 270, 1, 10, 0.6, 1);})
+  this.img.addEventListener('mouseout', function(){objRef.superSizeMe(270, 260, -1, 10, 1, 0.6);})
   this.divEl.appendChild(this.img);
   this.text = document.createElement('h3');
   this.text.textContent = this.itemName;
